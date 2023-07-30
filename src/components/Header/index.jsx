@@ -28,7 +28,7 @@ export default class Header extends Component {
                             <ul>
                                 {
                                     list.map(n => {
-                                        return <li>{n}</li>
+                                        return <li key={n}>{n}</li>
                                     })
                                 }
                             </ul>
@@ -38,7 +38,7 @@ export default class Header extends Component {
                             <ul>
                                 {
                                     list.map(n => {
-                                        return <li>{n + 12}</li>
+                                        return <li key={n+12}>{n + 12}</li>
                                     })
                                 }
                             </ul>

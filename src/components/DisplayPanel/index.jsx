@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import './index.css'
 
-export default class index extends Component {
+export default class DisplayPanel extends Component {
+  clearAll=(event)=>{
+    console.log(event,this.props)
+    this.props.clearAll()
+  }
   render() {
-    let chooseList = [
-      { dayName: '星期一', rangeList: [ '00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00']},
-      { dayName: '星期一', rangeList: [ '00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00']},
-      { dayName: '星期一', rangeList: [ '00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00']},
-      { dayName: '星期一', rangeList: [ '00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00','00:00~00:30', '00:30~01:00'] }
-    ]
+    let chooseList = []
+    const {week} = this.props
+    // 过滤出已选时间段
+    // todo:如何连续展示时间段
+    week.map(day =>{
+      let rangeList = day.rangeList.filter(item => item.active)
+      if(rangeList.length){
+        chooseList.push( {
+          dayName:day.dayName,
+          rangeList
+        })
+      }
+    })
     if(!chooseList.length){
       return (
         <div>
@@ -25,7 +36,7 @@ export default class index extends Component {
             <div className='row1-btn'>
               <a>工作日黄金时间</a>
               <a>休息日黄金时间</a>
-              <a>清空</a>
+              <a onClick={this.clearAll}>清空</a>
             </div>
           </div>
           <div className='display-row2'>
@@ -40,7 +51,7 @@ export default class index extends Component {
                       {day.rangeList.map((range, j) => {
                         return (
                           <span key={j}>
-                            {range}
+                            {range.value}
                             <span style={{display:day.rangeList.length-1 === j?'none':'inline'}}>、</span>
                           </span>
                         )
