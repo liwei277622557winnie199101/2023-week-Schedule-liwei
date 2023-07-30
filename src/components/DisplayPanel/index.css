@@ -1,0 +1,27 @@
+.display-content{
+    display: flex;
+    align-items: center;
+}
+.display-row1{
+    position: relative;
+}
+.row1-btn a {
+    color:rgb(75 134 249) ;
+    margin: 5px;
+    cursor: pointer;
+}
+.row1-btn a:hover{
+    color:rgb(7, 86, 243) ;
+}
+.row1-btn{
+    position: absolute;
+    top: 0;
+    right: 10px;
+    display: flex;
+}
+.row2-right{
+    width: 90%;
+    text-align: left;
+    word-wrap: break-word;
+    margin-top: 10px;
+}

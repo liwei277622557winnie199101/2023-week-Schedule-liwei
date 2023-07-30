@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            var flag = false;　　　　　//当鼠标被按下时，为true,放开是为true
+            var indexs = [];　　　　　　//用来存放鼠标经过的单元格在整个表格的位置，鼠标按下时被初始化，
+            dnf.onmousedown = function () {
+                flag = true;
+                indexs = [];
+            }
+            dnf.onmousemove = function (e) {
+                if (flag)//只有鼠标被按下时，才会执行复合代码
+                {
+                    indexs.push(search(e.target, dnf.getElementsByTagName("td")))
+                }
+            }
+            dnf.onmouseup = function () {
+                flag = false;
+                deleteUndefined();//由于会经过边框，所以会出现null元素
+                deleteRepaint();//由于onmouseover不会只触发一次，且我们选择是可能反复经过一个单元格
+                alert(indexs);
+            }
+            function deleteRepaint() {
+                for (var j = 0; j < indexs.length; j++)//保证第j个元素是唯一的
+                {
+                    var head = indexs[j];
+                    for (var i = j + 1; i < indexs.length; i++)//删除与第j个重复的
+                    {
+                        if (head == indexs[i]) {
+                            indexs.splice(i, 1);
+                            i--;
+                        }
+                    }
+                }
+            }
+            function deleteUndefined() {
+
+                for (var i = 0; i < indexs.length; i++) {
+                    if (typeof indexs[i] == "undefined") {
+                        indexs.splice(i, 1);
+                        i--;
+                    }
+                }
+
+            }
+            function search(a, A) {
+                var length = A.length;
+
+                for (var i = 0; i < length; i++) {
+
+                    if (a == A[i]) {
+
+                        return i;
+                    }
+
+                }
+            }
+        }
+    </script>
+    <table border="1" id="dnf">
+        <tr>
+
+
+            <td rowspan="2">2</td>
+            <td>2</td>
+            <td>4</td>
+        </tr>
+        <tr>
+
+
+            <td>2</td>
+            <td>4</td>
+        </tr>
+    </table>
+</body>
+
+</html>
