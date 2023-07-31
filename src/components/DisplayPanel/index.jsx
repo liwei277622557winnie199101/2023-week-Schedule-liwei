@@ -10,6 +10,7 @@ export default class DisplayPanel extends Component {
   clearAll = (event) => {
     this.props.clearAll()
   }
+  // 合并时间段
   mergeSelectionRanges = (sortedRanges) => {
     const mergedRanges = []
     let start = sortedRanges[0].start
@@ -35,7 +36,7 @@ export default class DisplayPanel extends Component {
       let rangeList = day.rangeList.filter(item => item.active)
       if (rangeList.length) {
         let list = rangeList.map(rl => {
-        let arr = rl.value.split('~')
+          let arr = rl.value.split('~')
           return {
             start: arr[0],
             end: arr[1]
@@ -47,6 +48,7 @@ export default class DisplayPanel extends Component {
         })
       }
     })
+
     if (!chooseList.length) {
       return (
         <div>

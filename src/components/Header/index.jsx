@@ -8,7 +8,7 @@ export default class Header extends Component {
             <div >
                 {/* 表头 */}
                 <div className='header'>
-                    <div className='main-header header-row1' style={{height:40+'px'}}>
+                    <div className='main-header header-row1' style={{ height: 40 + 'px' }}>
                         <div className='header-legend'>
                             <span className='choose-status choose-color'></span>
                             <span className='status-text'>已选</span>
@@ -37,7 +37,7 @@ export default class Header extends Component {
                             <ul>
                                 {
                                     list.map(n => {
-                                        return <li key={n+12}>{n + 12}</li>
+                                        return <li key={n + 12}>{n + 12}</li>
                                     })
                                 }
                             </ul>
